@@ -7,7 +7,9 @@ pipeline{
                 }
             }
             stage('Deploy'){
-                sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
+                steps{
+                        sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
+                }
             }
         }
 }
