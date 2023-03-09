@@ -3,7 +3,10 @@ pipeline{
         stages{
             stage('Clone'){
                 steps{
-                    if cd chaperootodo_client; then git pull; else git clone https://gitlab.com/qacdevops/chaperootodo_client.git; fi
+                    folder="chaperootodo_client"
+                    if ! git clone https://gitlab.com/qacdevops/chaperootodo_client.git "${folder}" 2>/dev/null && [ -d "${folder}" ] ; then
+                        echo "Clone failed because the folder ${folder} exists"
+                    fi
                 }
             }
             stage('Deploy'){
